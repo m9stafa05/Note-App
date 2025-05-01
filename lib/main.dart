@@ -19,6 +19,7 @@ class NoteApp extends StatelessWidget {
       theme: ThemeData(
         brightness: Brightness.dark,
         scaffoldBackgroundColor: const Color(0xFF393939),
+        fontFamily: 'Poppins',
       ),
     );
   }
