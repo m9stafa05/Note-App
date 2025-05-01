@@ -18,20 +18,7 @@ class NoteApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.dark,
-        scaffoldBackgroundColor: Colors.grey,
-      ),
-      title: 'Note App',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Note App'),
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.search),
-            ),
-          ],
-        ),
-        body: NoteView(),
+        scaffoldBackgroundColor: const Color(0xFF393939),
       ),
     );
   }
