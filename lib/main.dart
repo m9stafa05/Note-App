@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/views/edit_note_view.dart';
 import 'package:note_app/views/note_view.dart';
 
 // flutter build web --release && firebase init hosting && firebase deploy --only hosting -m 'V 1.0.0'
@@ -13,7 +14,10 @@ class NoteApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      routes: {NoteView.id: (context) => const NoteView()},
+      routes: {
+        NoteView.id: (context) => const NoteView(),
+        EditNoteView.id: (context) => const EditNoteView(),
+      },
       initialRoute: NoteView.id,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
