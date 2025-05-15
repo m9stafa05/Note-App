@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:note_app/constants.dart';
 import 'package:note_app/views/edit_note_view.dart';
 import 'package:note_app/views/note_view.dart';
 
 // flutter build web --release && firebase init hosting && firebase deploy --only hosting -m 'V 1.0.0'
 // firebase deploy --only hosting -m ' V 1.0.1'
 //flutter build web --release && firebase deploy --only hosting -m 'V 1.0.1'
-void main() {
+void main() async {
+  await Hive.initFlutter();
+  await Hive.openBox(kNoteBox);
   runApp(const NoteApp());
 }
 
