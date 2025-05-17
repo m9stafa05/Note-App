@@ -16,27 +16,30 @@ class AddNoteBottomSheet extends StatelessWidget {
         color: kModeColor,
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       ),
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-        child: BlocConsumer<AddNoteCubit, AddNoteState>(
-          listener: (context, state) {
-            if (state is AddNoteSuccess) {
-              Navigator.pop(context);
-            } else if (state is AddNoteFailure) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(state.errorMessage),
-                  backgroundColor: Colors.red,
-                ),
+      child: BlocProvider(
+        create: (context) => AddNoteCubit(),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          child: BlocConsumer<AddNoteCubit, AddNoteState>(
+            listener: (context, state) {
+              if (state is AddNoteSuccess) {
+                Navigator.pop(context);
+              } else if (state is AddNoteFailure) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(state.errorMessage),
+                    backgroundColor: Colors.red,
+                  ),
+                );
+              }
+            },
+            builder: (context, state) {
+              return ModalProgressHUD(
+                inAsyncCall: state is AddNoteLoading ? true : false,
+                child: SingleChildScrollView(child: AddNoteForm()),
               );
-            }
-          },
-          builder: (context, state) {
-            return ModalProgressHUD(
-              inAsyncCall: state is AddNoteLoading ? true : false,
-              child: SingleChildScrollView(child: AddNoteForm()),
-            );
-          },
+            },
+          ),
         ),
       ),
     );
