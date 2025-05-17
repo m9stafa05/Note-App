@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:note_app/constants.dart';
 
 class CustomBottomSheet extends StatelessWidget {
-  const CustomBottomSheet({super.key, this.onTap});
+  const CustomBottomSheet({
+    super.key,
+    this.onTap,
+    this.isLoading = false,
+  });
   final void Function()? onTap;
+  final bool isLoading;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -17,13 +22,24 @@ class CustomBottomSheet extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         height: 50,
         child: Center(
-          child: Text(
-            'Add ',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          child:
+              isLoading
+                  ? SizedBox(
+                      width: 24,
+                      height: 24,
+                    
+                    child: const CircularProgressIndicator(
+                      color: Colors.white,
+                      strokeWidth: 3,
+                    ),
+                  )
+                  : const Text(
+                    'Add ',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
         ),
       ),
     );
