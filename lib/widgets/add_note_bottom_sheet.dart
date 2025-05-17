@@ -10,7 +10,7 @@ class AddNoteBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 500,
+      height: 450,
       decoration: BoxDecoration(
         color: kModeColor,
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
@@ -34,7 +34,10 @@ class AddNoteBottomSheet extends StatelessWidget {
             return AbsorbPointer(
               absorbing: state is AddNoteLoading ? true : false,
               child: const Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 32,
+                ),
                 child: SingleChildScrollView(child: AddNoteForm()),
               ),
             );

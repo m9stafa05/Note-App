@@ -22,13 +22,6 @@ class _AddNoteFormState extends State<AddNoteForm> {
       key: formKey,
       child: Column(
         children: [
-          const Text(
-            'Add Note',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
           const SizedBox(height: 10),
           CustomTextField(
             hintText: 'Title',
