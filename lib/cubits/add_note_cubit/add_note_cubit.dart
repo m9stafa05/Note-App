@@ -1,5 +1,7 @@
+// ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
 import 'package:hive/hive.dart';
+// ignore: depend_on_referenced_packages
 import 'package:meta/meta.dart';
 import 'package:note_app/constants.dart';
 import 'package:note_app/models/note_model.dart';
@@ -13,10 +15,10 @@ class AddNoteCubit extends Cubit<AddNoteState> {
     emit(AddNoteLoading());
     try {
       var noteBox = Hive.box<NoteModel>(kNoteBox);
-      emit(AddNoteSuccess());
       noteBox.add(note);
+      emit(AddNoteSuccess());
     } catch (e) {
-      AddNoteFailure(errorMessage: e.toString());
+      emit(AddNoteFailure(errorMessage: e.toString()));
     }
   }
 }
