@@ -32,7 +32,12 @@ class NoteApp extends StatelessWidget {
       child: MaterialApp(
         routes: {
           NoteView.id: (context) => const NoteView(),
-          EditNoteView.id: (context) => const EditNoteView(),
+          EditNoteView.id: (context) {
+            final note =
+                ModalRoute.of(context)!.settings.arguments
+                    as NoteModel;
+            return EditNoteView(note: note);
+          },
         },
         initialRoute: NoteView.id,
         debugShowCheckedModeBanner: false,
