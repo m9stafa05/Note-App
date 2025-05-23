@@ -48,7 +48,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
                   content: content!,
                   // ignore: deprecated_member_use
                   color: Colors.blue.value,
-                  date: DateFormat('hh:mm a').format(DateTime.now()),
+                  date: formatFriendlyDate(DateTime.now()),
                 );
                 BlocProvider.of<AddNoteCubit>(
                   context,
@@ -62,5 +62,23 @@ class _AddNoteFormState extends State<AddNoteForm> {
         ],
       ),
     );
+  }
+}
+String formatFriendlyDate(DateTime date) {
+  final now = DateTime.now();
+  final today = DateTime(now.year, now.month, now.day);
+  final yesterday = today.subtract(Duration(days: 1));
+  final dateToCheck = DateTime(date.year, date.month, date.day);
+
+  String time = DateFormat('h:mm a').format(date);
+
+  if (dateToCheck == today) {
+    return 'Today at $time';
+  } else if (dateToCheck == yesterday) {
+    return 'Yesterday at $time';
+  } else if (now.difference(date).inDays < 7) {
+    return '${DateFormat('EEEE').format(date)} at $time'; // e.g., Monday at 3:00 PM
+  } else {
+    return '${DateFormat('MMM d, yyyy').format(date)} at $time'; // e.g., May 20, 2025 at 3:00 PM
   }
 }
