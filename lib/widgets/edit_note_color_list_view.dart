@@ -2,36 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:note_app/constants.dart';
 import 'package:note_app/cubits/add_note_cubit/add_note_cubit.dart';
+import 'package:note_app/models/note_model.dart';
+import 'package:note_app/widgets/colors_list_view.dart';
 
-class ColorItem extends StatelessWidget {
-  const ColorItem({
-    super.key,
-    required this.isSelected,
-    required this.color,
-  });
-  final bool isSelected;
-  final Color color;
+class EditNoteColorsList extends StatefulWidget {
+  const EditNoteColorsList({super.key, required this.note});
+  final NoteModel note;
   @override
-  Widget build(BuildContext context) {
-    return isSelected
-        ? CircleAvatar(
-          backgroundColor: const Color(0xFFF0F0F0),
-          radius: 32,
-          child: CircleAvatar(backgroundColor: color, radius: 28),
-        )
-        : CircleAvatar(backgroundColor: color, radius: 32);
+  State<EditNoteColorsList> createState() =>
+      _EditNoteColorsListState();
+}
+
+class _EditNoteColorsListState extends State<EditNoteColorsList> {
+  late int currentIndex;
+
+  @override
+  void initState() {
+    currentIndex = kColors.indexOf(Color(widget.note.color));
+    super.initState();
   }
-}
-
-class ColorListView extends StatefulWidget {
-  const ColorListView({super.key});
-
-  @override
-  State<ColorListView> createState() => _ColorListViewState();
-}
-
-class _ColorListViewState extends State<ColorListView> {
-  int currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +36,8 @@ class _ColorListViewState extends State<ColorListView> {
               onTap: () {
                 setState(() {
                   currentIndex = index;
+                  // ignore: deprecated_member_use
+                  widget.note.color = kColors[index].value;
                   BlocProvider.of<AddNoteCubit>(context).color =
                       kColors[index];
                 });
