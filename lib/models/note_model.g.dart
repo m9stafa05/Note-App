@@ -14,13 +14,14 @@ class NoteModelAdapter extends TypeAdapter<NoteModel> {
   NoteModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
-      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+      for (int i = 0; i < numOfFields; i++)
+        reader.readByte(): reader.read(),
     };
     return NoteModel(
       title: fields[0] as String,
       content: fields[1] as String,
       color: fields[3] as int,
-      data: fields[2] as String,
+      date: fields[2] as String,
     );
   }
 
@@ -33,7 +34,7 @@ class NoteModelAdapter extends TypeAdapter<NoteModel> {
       ..writeByte(1)
       ..write(obj.content)
       ..writeByte(2)
-      ..write(obj.data)
+      ..write(obj.date)
       ..writeByte(3)
       ..write(obj.color);
   }
