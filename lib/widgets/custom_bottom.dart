@@ -25,9 +25,8 @@ class CustomBottomSheet extends StatelessWidget {
           child:
               isLoading
                   ? SizedBox(
-                      width: 24,
-                      height: 24,
-                    
+                    width: 24,
+                    height: 24,
                     child: const CircularProgressIndicator(
                       color: Colors.white,
                       strokeWidth: 3,
